@@ -2,7 +2,7 @@
 
 namespace TesteBook.WebApp.Model
 {
-    public class HomeModelView
+    public class VolumesModelView
     {
         public IEnumerable<VolumeModelView> Volumes { get; set; } = new List<VolumeModelView>();
     }

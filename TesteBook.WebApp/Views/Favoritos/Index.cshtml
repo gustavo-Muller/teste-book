@@ -1,1 +1,71 @@
-﻿
+﻿@using TesteBook.WebApp.Model;
+@model VolumesModelView;
+
+@{
+    var model = Model ?? new VolumesModelView();
+}
+
+<style>
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+</style>
+
+<div id="snackbar">Excluido dos favoritos com sucesso</div>
+
+<div class="row">
+    @foreach (var volume in model.Volumes)
+    {
+        <div class="col-md-4 mt-2" style="height: 500px; background-color: lightgray; word-wrap: break-word;">
+            <form method="post" action="/deletar/id=@volume.Id" target="">
+                <div class="d-flex flex-row-reverse bd-highlight mt-2">
+                    <button class="btn" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                </div>
+            </form>
+            <div class="row mb-2" style="justify-content: space-around;">
+                <div class="col-6">
+                    <img src="@volume.Thumbnail" books.google.com="" books="" style="padding-top: 10px;" class="pt-0">
+                </div>
+                <div class="col-6">
+                    <span style="text-align: justify; font-weight: 600; font-size: 16px; text-align: center; text-transform: uppercase;">@volume.Title</span>
+                </div>
+            </div>
+            <span style="text-align: justify;display: block; text-overflow: ellipsis;word-wrap: break-word;" class="pl-2 pr-2">@volume.Description</span>
+        </div>
+
+    }
+</div>
+
+<script>
+    debugger
+    function executeMessage() {
+        debugger
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+</script>
+@if (TempData["excluido"]?.ToString() == "True")
+{
+    <script>
+        executeMessage();
+    </script>
+}

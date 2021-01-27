@@ -21,12 +21,11 @@ namespace TesteBook.WebApp.Controllers
             _service = service;
         }
 
-        public IActionResult Index(HomeModelView model)
+        public IActionResult Index(VolumesModelView model)
         {
-            if(!model.Volumes.Any())
+            if (!model.Volumes.Any())
             {
-                var booksResult = _service.ObtenhaLivros(string.Empty).Result;
-                model.Volumes = booksResult.Volumes.Select(v => Converta(v));
+                model.Volumes = ObtenhaVolumesViewModel(string.Empty);
             }
 
             return View("Index", model);
@@ -35,17 +34,14 @@ namespace TesteBook.WebApp.Controllers
         [HttpGet("pesquisar")]
         public IActionResult Pesquisar(string parametros)
         {
-            var booksResult = _service.ObtenhaLivros(parametros).Result;
-            var volumesModelView = booksResult.Volumes.Select(v => Converta(v));
-
-            return Index(new HomeModelView() { Volumes = volumesModelView });
+            return Index(new VolumesModelView() { Volumes = ObtenhaVolumesViewModel(parametros) });
         }
 
-        [HttpPost("favoritos/id={id}")]
+        [HttpPost("favorite/id={id}")]
         public IActionResult favoritar(string id)
         {
             _service.FavoriteLivro(id);
-            return Ok();
+            return Index(new VolumesModelView());
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -54,12 +50,19 @@ namespace TesteBook.WebApp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
+        private IEnumerable<VolumeModelView> ObtenhaVolumesViewModel(string parametros)
+       {
+            var booksResult = _service.ObtenhaLivros(parametros).Result;
+            var favoritos = _service.ObtenhaFavoritos().Result;
+            return booksResult.Volumes.Select(v => Converta(v, favoritos.Exists(f => f.Id.Equals(v.Id))));
+        }
 
-        private VolumeModelView Converta(Volume volume)
+        private VolumeModelView Converta(Volume volume, bool favoritado)
         {
             return new VolumeModelView()
             {
                 Id = volume.Id,
+                Favoritado = favoritado,
                 Title = volume.Title,
                 Publisher = volume.Publisher,
                 Description = !string.IsNullOrEmpty(volume.Description) && volume.Description.Length > 400 ? volume.Description.Substring(0, 400) : volume.Description,

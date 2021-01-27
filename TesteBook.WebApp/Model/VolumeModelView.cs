@@ -3,6 +3,7 @@
     public class VolumeModelView
     {
         public string Id { get; set; }
+        public bool Favoritado { get; set; }
         public string Title { get; set; }
         public string Publisher { get; set; }
         public string Description { get; set; }

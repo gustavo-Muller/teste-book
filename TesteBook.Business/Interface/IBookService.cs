@@ -10,6 +10,6 @@ namespace TesteBook.Business.Interface
         Task<BooksResult> ObtenhaLivros(string parametro);
         Task FavoriteLivro(string id);
         Task<List<Volume>> ObtenhaFavoritos();
-        void DeleteFavorito(string id);
+        Task DeleteFavorito(string id);
     }
 }

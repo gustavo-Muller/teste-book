@@ -1,11 +1,10 @@
 ﻿@using TesteBook.WebApp.Model;
-@model HomeModelView;
+@model VolumesModelView;
 
 @{
     ViewData["Title"] = "Home Page";
-    var model = Model ?? new HomeModelView();
+    var model = Model ?? new VolumesModelView();
 }
-
 <div class="text-center" style="width: 100%;">
     <h1 class="display-4">Books</h1>
     <form method="get" action="/pesquisar" style="width: 100%;">
@@ -20,11 +19,12 @@
 <div class="row">
     @foreach (var volume in model.Volumes)
     {
-        <input type="hidden" id="@volume.Id" value="@volume.Id" />
         <div class="col-md-4 mt-2" style="height: 500px; background-color: lightgray; word-wrap: break-word;">
-            <div class="d-flex flex-row-reverse bd-highlight mt-2">
-                <button class="btn" asp-controller="home" asp-action="favoritos"><i class="fa fa-star-o" aria-hidden="true"></i></button>
-            </div>
+            <form method="post" action="/favorite/id=@volume.Id" target="">
+                <div class="d-flex flex-row-reverse bd-highlight mt-2">
+                    <button class="btn" type="submit"><i class="@(volume.Favoritado ? "fa fa-star" : "fa fa-star-o")" aria-hidden="true"></i></button>
+                </div>
+            </form>
             <div class="row mb-2" style="justify-content: space-around;">
                 <div class="col-6">
                     <img src="@volume.Thumbnail" books.google.com="" books="" style="padding-top: 10px;" class="pt-0">

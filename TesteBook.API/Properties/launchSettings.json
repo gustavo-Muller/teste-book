@@ -11,7 +11,7 @@
     "TesteBook.API": {
       "commandName": "Project"
     },
-    "ISS Express": {
+    "IIS Express": {
       "commandName": "IISExpress"
     }
   }

@@ -9,6 +9,8 @@ namespace TesteBook.Business.Utils
     {
         public static BooksResult Converta(this BookDTO dto)
         {
+            if (dto == null || dto.Items == null) return new BooksResult();
+
             return new BooksResult()
             {
                 TotalItems = dto.TotalItems,

@@ -15,25 +15,25 @@ namespace TesteBook.WebApp.Service
             _api = api;
         }
 
-        public void DeleteFavorito(string id)
+        public async Task DeleteFavorito(string id)
         {
-            //_api.DeleteFavorito(id);
+            await _api.Delete($"favorite?id={id}");
         }
 
         public async Task FavoriteLivro(string id)
         {
-            //await _api.FavoriteLivro(id);
+            await _api.Post(new FavoriteParams() { Id = id }, "favorite/");
         }
 
         public async Task<List<Volume>> ObtenhaFavoritos()
         {
-            return await _api.Get<List<Volume>>("");
+            return await _api.Get<List<Volume>>("favorites");
         }
 
         public async Task<BooksResult> ObtenhaLivros(string parametro)
         {
             if (string.IsNullOrEmpty(parametro)) parametro = "{}";
-            return await _api.Get<BooksResult>(parametro);
+            return await _api.Get<BooksResult>($"?parametro={parametro}");
         }
     }
 }

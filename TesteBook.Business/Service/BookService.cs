@@ -41,36 +41,33 @@ namespace TesteBook.Service
 
             return new BooksResult();
         }
-
-
+        
         public async Task FavoriteLivro(string id)
         {
             using(var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(_uri);
-                var result = await client.GetAsync($"volumes?q={{id={id}}}");
+                var result = await client.GetAsync($"volumes/{id}");
 
                 if (result.IsSuccessStatusCode)
                 {
                     var resultString = await result.Content.ReadAsStringAsync();
-                    var booksDTO = JsonConvert.DeserializeObject<BookDTO>(resultString);
-                    var books = booksDTO.Converta();
+                    var volumeDTO = JsonConvert.DeserializeObject<VolumeDTO>(resultString);
+                    var books = volumeDTO.Converta();
 
-                    _bookRepository.Favorite(books.Volumes.FirstOrDefault());
+                    _bookRepository.Favorite(books);
                 }
             }
         }
 
-
         public async Task<List<Volume>> ObtenhaFavoritos()
         {
-            var favoritos = await _bookRepository.ObtenhaFavoritos();
-            return favoritos;
+            return await _bookRepository.ObtenhaFavoritos();
         }
 
-        public void DeleteFavorito(string id)
+        public async Task DeleteFavorito(string id)
         {
-            _bookRepository.DeleteFavorito(id);
+            await _bookRepository.DeleteFavorito(id);
         }
 
     }

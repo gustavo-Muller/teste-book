@@ -9,6 +9,6 @@ namespace TesteBook.Business.Repository
     {
         void Favorite(Volume volume);
         Task<List<Volume>> ObtenhaFavoritos();
-        void DeleteFavorito(string id);
+        Task DeleteFavorito(string id);
     }
 }

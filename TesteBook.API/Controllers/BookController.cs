@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using TesteBook.Business.Interface;
 using TesteBook.Business.Model;
@@ -18,28 +19,27 @@ namespace TesteBook.API.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<ActionResult<BooksResult>> Get(string parametros)
+        public async Task<ActionResult<BooksResult>> Get([FromQuery] string parametro)
         {
-            var booksResult = _service.ObtenhaLivros(parametros);
+            var booksResult = _service.ObtenhaLivros(parametro);
             return await booksResult;
         }
 
         [HttpPost]
-        [Route("favoritos/id={id}")]
-        public async Task<ActionResult> Favorite(string id)
+        [Route("favorite")]
+        public async Task<ActionResult> Favorite(FavoriteParams param)
         {
             if (ModelState.IsValid)
             {
-                await _service.FavoriteLivro(id);
-                return null;
+                await _service.FavoriteLivro(param.Id);
+                return Ok();
             }
 
             return BadRequest();
         }
 
         [HttpGet]
-        [Route("favoritos")]
+        [Route("favorites")]
         public async Task<ActionResult<List<Volume>>> GetFavoritos()
         {
             var booksResult = _service.ObtenhaFavoritos();
@@ -47,11 +47,12 @@ namespace TesteBook.API.Controllers
         }
 
         [HttpDelete]
-        [Route("favoritos/id={id}")]
-        public void DeleteFavorito(string id)
+        [Route("favorite")]
+        public void DeleteFavorito([FromQuery] string id)
         {
             _service.DeleteFavorito(id);
         }
 
     }
 }
+ 

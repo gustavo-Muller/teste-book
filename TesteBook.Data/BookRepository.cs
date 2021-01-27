@@ -30,16 +30,16 @@ namespace TesteBook.Data
         {
             using (var dbContext = new BookContext())
             {
-                var volumes = await dbContext.Volumes.AsNoTracking().ToListAsync();
-                return volumes;
+                return await dbContext.Volumes.ToListAsync();
             }
         }
 
-        public void DeleteFavorito(string id)
+        public async Task DeleteFavorito(string id)
         {
             using (var dbContext = new BookContext())
             {
-                dbContext.Remove(dbContext.Volumes.SingleAsync(v => v.Id.Equals(id)).Result);
+                var volume = await dbContext.Volumes.SingleAsync(v => v.Id.Equals(id));
+                dbContext.Remove(volume);
                 dbContext.SaveChanges();
             }
         }
