@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using TesteBook.Business.DTO;
@@ -36,7 +35,6 @@ namespace TesteBook.Service
 
                     return booksDTO.Converta();
                 }
-
             }
 
             return new BooksResult();

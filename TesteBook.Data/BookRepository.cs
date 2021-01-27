@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TesteBook.Business.Model;
@@ -13,16 +12,8 @@ namespace TesteBook.Data
         {
             using (var dbContext = new BookContext())
             {
-                try
-                {
-
-                    dbContext.Volumes.Add(volume);
-                    dbContext.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-
-                }
+                dbContext.Volumes.Add(volume);
+                dbContext.SaveChanges();
             }
         }
 

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MaximaTechCriptografia.Business;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using TesteBook.Business.Interface;
 using TesteBook.Business.Model;
@@ -21,38 +22,63 @@ namespace TesteBook.API.Controllers
         [HttpGet]
         public async Task<ActionResult<BooksResult>> Get([FromQuery] string parametro)
         {
-            var booksResult = _service.ObtenhaLivros(parametro);
-            return await booksResult;
+            try
+            {
+                return await _service.ObtenhaLivros(parametro);
+            }
+            catch (Exception ex)
+            {
+                UtilitarioLogger.GraveLog(ex.Message);
+                return BadRequest(new BooksResult());
+            }
         }
 
         [HttpPost]
         [Route("favorite")]
         public async Task<ActionResult> Favorite(FavoriteParams param)
         {
-            if (ModelState.IsValid)
+            try
             {
                 await _service.FavoriteLivro(param.Id);
                 return Ok();
             }
-
-            return BadRequest();
+            catch (Exception ex)
+            {
+                UtilitarioLogger.GraveLog(ex.Message);
+                return BadRequest();
+            }
         }
 
         [HttpGet]
         [Route("favorites")]
         public async Task<ActionResult<List<Volume>>> GetFavoritos()
         {
-            var booksResult = _service.ObtenhaFavoritos();
-            return await booksResult;
+            try
+            {
+                return await _service.ObtenhaFavoritos();
+            }
+            catch (Exception ex)
+            {
+                UtilitarioLogger.GraveLog(ex.Message);
+                return BadRequest(new List<Volume>());
+            }
         }
 
         [HttpDelete]
         [Route("favorite")]
-        public void DeleteFavorito([FromQuery] string id)
+        public async Task<ActionResult> DeleteFavorito([FromQuery] string id)
         {
-            _service.DeleteFavorito(id);
+            try
+            {
+                await _service.DeleteFavorito(id);
+                return Ok();
+            }
+            catch(Exception ex)
+            {
+                UtilitarioLogger.GraveLog(ex.Message);
+                return BadRequest();
+            }
         }
 
     }
 }
- 

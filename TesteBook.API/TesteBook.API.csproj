@@ -13,9 +13,5 @@
     <ProjectReference Include="..\TesteBook.Data\TesteBook.Data.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Data\" />
-  </ItemGroup>
-
 
 </Project>

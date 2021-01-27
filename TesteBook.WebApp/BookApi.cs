@@ -1,14 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MaximaTechCriptografia.Business;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using TesteBook.Business.Interface;
-using TesteBook.Business.Model;
 
 namespace TesteBook.WebApp
 {
@@ -32,6 +29,7 @@ namespace TesteBook.WebApp
                 }
                 catch (Exception ex)
                 {
+                    UtilitarioLogger.GraveLog(ex.Message);
                 }
 
                 return default;
@@ -54,6 +52,7 @@ namespace TesteBook.WebApp
             }
             catch (Exception ex)
             {
+                UtilitarioLogger.GraveLog(ex.Message);
             }
         }
 
@@ -71,8 +70,7 @@ namespace TesteBook.WebApp
             }
             catch (Exception ex)
             {
-
-                throw;
+                UtilitarioLogger.GraveLog(ex.Message);
             }
         }
 

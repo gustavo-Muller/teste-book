@@ -43,10 +43,7 @@ namespace TesteBook.WebApp.Controllers
                 Id = volume.Id,
                 Favoritado = true,
                 Title = volume.Title,
-                Publisher = volume.Publisher,
                 Description = !string.IsNullOrEmpty(volume.Description) && volume.Description.Length > 400 ? volume.Description.Substring(0, 400) : volume.Description,
-                PageCount = volume.PageCount,
-                PrintType = volume.PrintType,
                 Thumbnail = volume.Thumbnail
             };
         }

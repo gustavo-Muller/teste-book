@@ -34,6 +34,5 @@ namespace TesteBook.Data
 
             base.OnModelCreating(modelBuilder);
         }
-
     }
 }

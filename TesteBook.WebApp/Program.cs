@@ -1,11 +1,8 @@
+using MaximaTechCriptografia.Business;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace TesteBook.WebApp
 {
@@ -13,6 +10,7 @@ namespace TesteBook.WebApp
     {
         public static void Main(string[] args)
         {
+            UtilitarioLogger.PathLog = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LOGS");
             CreateHostBuilder(args).Build().Run();
         }
 

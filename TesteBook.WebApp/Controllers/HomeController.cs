@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using TesteBook.Business.Interface;
 using TesteBook.Business.Model;
 using TesteBook.WebApp.Model;
@@ -64,10 +61,7 @@ namespace TesteBook.WebApp.Controllers
                 Id = volume.Id,
                 Favoritado = favoritado,
                 Title = volume.Title,
-                Publisher = volume.Publisher,
                 Description = !string.IsNullOrEmpty(volume.Description) && volume.Description.Length > 400 ? volume.Description.Substring(0, 400) : volume.Description,
-                PageCount = volume.PageCount,
-                PrintType = volume.PrintType,
                 Thumbnail = volume.Thumbnail
             };
         }

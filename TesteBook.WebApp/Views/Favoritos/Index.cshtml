@@ -57,10 +57,12 @@
 <script>
     debugger
     function executeMessage() {
-        debugger
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        var snackBar = document.getElementById("snackbar");
+        snackBar.className = "show";
+        setTimeout(function ()
+        {
+            snackBar.className = snackBar.className.replace("show", "");
+        }, 3000);
     }
 </script>
 @if (TempData["excluido"]?.ToString() == "True")

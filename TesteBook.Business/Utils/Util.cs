@@ -1,5 +1,4 @@
-﻿using System;
-using TesteBook.Business.DTO;
+﻿using TesteBook.Business.DTO;
 using TesteBook.Business.Model;
 using System.Linq;
 
@@ -24,10 +23,7 @@ namespace TesteBook.Business.Utils
             {
                 Id = dto.Id,
                 Title = dto.VolumeInfo.Title,
-                Publisher = dto.VolumeInfo.Publisher,
                 Description = dto.VolumeInfo.Description,
-                PageCount = dto.VolumeInfo.PageCount,
-                PrintType = dto.VolumeInfo.PrintType,
                 Thumbnail = dto.VolumeInfo.ImageLinks.Thumbnail
             };
         }
