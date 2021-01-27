@@ -34,23 +34,24 @@
 <div class="row">
     @foreach (var volume in model.Volumes)
     {
-        <div class="col-md-4 mt-2" style="height: 500px; background-color: lightgray; word-wrap: break-word;">
-            <form method="post" action="/deletar/id=@volume.Id" target="">
-                <div class="d-flex flex-row-reverse bd-highlight mt-2">
-                    <button class="btn" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+        <div class="col-md-4 mt-2">
+            <div class="pl-2 pr-2" style="height: 500px; background-color: lightgray; word-wrap: break-word;">
+                <form method="post" action="/deletar/id=@volume.Id" target="">
+                    <div class="d-flex flex-row-reverse bd-highlight mt-2">
+                        <button class="btn" type="submit"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                    </div>
+                </form>
+                <div class="row mb-2" style="justify-content: space-around;">
+                    <div class="col-6">
+                        <img src="@volume.Thumbnail" books.google.com="" books="" style="padding-top: 10px;" class="pt-0">
+                    </div>
+                    <div class="col-6">
+                        <span style="text-align: justify; font-weight: 600; font-size: 16px; text-align: center; text-transform: uppercase;">@volume.Title</span>
+                    </div>
                 </div>
-            </form>
-            <div class="row mb-2" style="justify-content: space-around;">
-                <div class="col-6">
-                    <img src="@volume.Thumbnail" books.google.com="" books="" style="padding-top: 10px;" class="pt-0">
-                </div>
-                <div class="col-6">
-                    <span style="text-align: justify; font-weight: 600; font-size: 16px; text-align: center; text-transform: uppercase;">@volume.Title</span>
-                </div>
+                <span style="text-align: justify;display: block; text-overflow: ellipsis;word-wrap: break-word;" class="pl-2 pr-2">@volume.Description</span>
             </div>
-            <span style="text-align: justify;display: block; text-overflow: ellipsis;word-wrap: break-word;" class="pl-2 pr-2">@volume.Description</span>
         </div>
-
     }
 </div>
 
@@ -59,8 +60,7 @@
     function executeMessage() {
         var snackBar = document.getElementById("snackbar");
         snackBar.className = "show";
-        setTimeout(function ()
-        {
+        setTimeout(function () {
             snackBar.className = snackBar.className.replace("show", "");
         }, 3000);
     }

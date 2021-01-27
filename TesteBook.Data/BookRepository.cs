@@ -34,5 +34,23 @@ namespace TesteBook.Data
                 dbContext.SaveChanges();
             }
         }
+
+        public async Task<Volume> Obtenha(string id)
+        {
+            using(var dbContext = new BookContext())
+            {
+                return await dbContext.Volumes.FirstOrDefaultAsync(v => v.Id.Equals(id));
+            }
+
+        }
+
+        public async Task<bool> ExisteLivro(string id)
+        {
+            using (var dbContext = new BookContext())
+            {
+                var volume = await dbContext.Volumes.FirstOrDefaultAsync(v => v.Id.Equals(id));
+                return volume != null;
+            }
+        }
     }
 }

@@ -39,21 +39,22 @@ namespace TesteBook.Service
 
             return new BooksResult();
         }
-        
+
         public async Task FavoriteLivro(string id)
         {
-            using(var client = new HttpClient())
+            if (!_bookRepository.ExisteLivro(id).Result)
             {
-                client.BaseAddress = new Uri(_uri);
-                var result = await client.GetAsync($"volumes/{id}");
-
-                if (result.IsSuccessStatusCode)
+                using (var client = new HttpClient())
                 {
-                    var resultString = await result.Content.ReadAsStringAsync();
-                    var volumeDTO = JsonConvert.DeserializeObject<VolumeDTO>(resultString);
-                    var books = volumeDTO.Converta();
+                    client.BaseAddress = new Uri(_uri);
+                    var result = await client.GetAsync($"volumes/{id}");
 
-                    _bookRepository.Favorite(books);
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var resultString = await result.Content.ReadAsStringAsync();
+                        var volumeDTO = JsonConvert.DeserializeObject<VolumeDTO>(resultString);
+                        _bookRepository.Favorite(volumeDTO.Converta());
+                    }
                 }
             }
         }

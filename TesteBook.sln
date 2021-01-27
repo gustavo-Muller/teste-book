@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteBook.WebApp", "TesteBo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesteBook.API", "TesteBook.API\TesteBook.API.csproj", "{A0774240-4FE1-4636-ADDD-C8B3D9BFA98E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TesteBook.Test", "TesteBook.Test\TesteBook.Test.csproj", "{C719CBE0-BC9E-4464-8841-4A275F071548}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{A0774240-4FE1-4636-ADDD-C8B3D9BFA98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0774240-4FE1-4636-ADDD-C8B3D9BFA98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0774240-4FE1-4636-ADDD-C8B3D9BFA98E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C719CBE0-BC9E-4464-8841-4A275F071548}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C719CBE0-BC9E-4464-8841-4A275F071548}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C719CBE0-BC9E-4464-8841-4A275F071548}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C719CBE0-BC9E-4464-8841-4A275F071548}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
