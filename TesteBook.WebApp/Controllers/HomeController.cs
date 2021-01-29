@@ -48,10 +48,21 @@ namespace TesteBook.WebApp.Controllers
         }
 
         private IEnumerable<VolumeModelView> ObtenhaVolumesViewModel(string parametros)
-       {
-            var booksResult = _service.ObtenhaLivros(parametros).Result;
+        {
+            var booksResult = _service.ObtenhaLivros(parametros).Result ?? new BooksResult();
             var favoritos = _service.ObtenhaFavoritos().Result;
-            return booksResult.Volumes.Select(v => Converta(v, favoritos.Exists(f => f.Id.Equals(v.Id))));
+
+            return booksResult.Volumes.Select(v => Converta(v, VolumeEstaFavoritado(v, favoritos)));
+        }
+
+        private static bool VolumeEstaFavoritado(Volume v, List<Volume> favoritos)
+        {
+            if(favoritos != null && favoritos.Any())
+            {
+                return favoritos.Any(f => f.Id.Equals(v.Id));
+            }
+
+            return false;
         }
 
         private VolumeModelView Converta(Volume volume, bool favoritado)

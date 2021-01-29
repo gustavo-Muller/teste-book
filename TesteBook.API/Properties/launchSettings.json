@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/TesteBook.API",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:58915/",
       "sslPort": 0
